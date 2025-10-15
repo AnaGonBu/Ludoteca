@@ -1,0 +1,27 @@
+node_modules/
+target/*
+!target/*.jar
+.idea/
+.vscode/
+*.log
+cat > .gitignore << 'EOF'
+# Maven
+target/
+*.jar
+*.war
+*.ear
+
+# Node
+node_modules/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Environment
+.env
+.env.local
+EOF

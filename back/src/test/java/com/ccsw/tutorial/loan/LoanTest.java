@@ -1,21 +1,23 @@
 package com.ccsw.tutorial.loan;
 
-import com.ccsw.tutorial.client.ClientServiceImpl;
-import com.ccsw.tutorial.game.GameServiceImpl;
-import com.ccsw.tutorial.loan.model.Loan;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.ccsw.tutorial.client.ClientServiceImpl;
+import com.ccsw.tutorial.game.GameServiceImpl;
+import com.ccsw.tutorial.loan.model.Loan;
 
 @ExtendWith(MockitoExtension.class)
 public class LoanTest {
@@ -39,7 +41,7 @@ public class LoanTest {
 
         when(loanRepository.findAll()).thenReturn(list);
 
-        List<Loan> loans = loanServiceImpl.getAll();
+        List<Loan> loans = loanServiceImpl.findAll();
 
         assertNotNull(loans);
         assertEquals(1, loans.size());
