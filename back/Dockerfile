@@ -1,20 +1,18 @@
-# Imagen base con Java 17 (Temurin es estable y compatible con Spring Boot 3.x)
-FROM eclipse-temurin:17-jdk
+FROM maven:3.8.1-openjdk-17 AS build
 
-# Crear directorio de trabajo
 WORKDIR /app
 
-# Copiar todo el código fuente al contenedor
-COPY . .
+COPY pom.xml .
+COPY src ./src
 
-# Dar permisos de ejecución al wrapper de Maven (por si falla en Linux)
-RUN chmod +x mvnw
+RUN mvn clean package -DskipTests
 
-# Construir el proyecto sin ejecutar los tests
-RUN ./mvnw clean package -DskipTests
+FROM eclipse-temurin:17-jdk
 
-# Exponer el puerto de la app
+WORKDIR /app
+
+COPY --from=build /app/target/ludoteca-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
 
-# Ejecutar el JAR generado
-CMD ["java", "-jar", "target/*.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
