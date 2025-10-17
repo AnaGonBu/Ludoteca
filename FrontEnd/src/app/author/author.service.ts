@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Pageable } from '../core/model/page/Pageable';
-import { Observable, of } from 'rxjs';
-import { AuthorPage } from './model/AuthorPage';
-import { Author } from './model/Author';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../environment/environment';
+import { Pageable } from '../core/model/page/Pageable';
+import { Author } from './model/Author';
+import { AuthorPage } from './model/AuthorPage';
 
 
 @Injectable({
@@ -13,7 +14,8 @@ export class AuthorService {
 
   constructor(private http: HttpClient) { }
 
-  private baseUrl = 'http://localhost:8080/author';
+  //private baseUrl = 'http://localhost:8080/author';
+    private baseUrl = `${environment.apiUrl}/author`;
 
   getAuthors(pageable: Pageable): Observable<AuthorPage>{
 

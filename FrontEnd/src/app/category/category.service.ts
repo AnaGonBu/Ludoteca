@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Category } from './model/Category';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../environment/environment';
+import { Category } from './model/Category';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class CategoryService {
     private http: HttpClient
   ) {}
 
-  private baseUrl = 'http://localhost:8080/category';
+  //private baseUrl = 'http://localhost:8080/category';
+  private baseUrl = `${environment.apiUrl}/category`;
+  
 
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.baseUrl);

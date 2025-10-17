@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs';
-import { Client } from './model/Client';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../environment/environment';
+import { Client } from './model/Client';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class ClientService {
     private http: HttpClient
   ) { }
 
-  private baseUrl = 'http://localhost:8080/client';
+  //private baseUrl = 'http://localhost:8080/client';
+  private baseUrl = `${environment.apiUrl}/client`;
+  
 
   getClients(): Observable<Client[]>{
     return this.http.get<Client[]>(this.baseUrl)

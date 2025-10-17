@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Pageable } from '../core/model/page/Pageable';
-import { Observable, of } from 'rxjs';
-import { LoanPage } from './model/loanPage';
-import { Loan } from './model/loan';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../environment/environment';
+import { Pageable } from '../core/model/page/Pageable';
+import { Loan } from './model/loan';
+import { LoanPage } from './model/loanPage';
 ;
 
 @Injectable({
@@ -15,8 +16,8 @@ export class LoanService {
     private http: HttpClient
 ) { }
 
-private baseUrl = 'http://localhost:8080/loan';
-private baseUrlAlta =  'http://localhost:8080/loan/alta';
+private baseUrl = `${environment.apiUrl}/loan`;
+private baseUrlAlta = `${environment.apiUrl}/loan/alta`;
 
 
 getLoans(pageable: Pageable, game?: number | null, client?: number | null, date?:string): Observable<LoanPage> {
